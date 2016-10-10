@@ -6,6 +6,7 @@ from xml.sax.handler import ContentHandler
 import smallsmilhandler
 import sys
 import json
+from urllib.request import urlretrieve
 
 
 def print_elementos(datos):
@@ -17,6 +18,17 @@ def print_elementos(datos):
             elem = elem + "\t" + atributo + "=" + sublista[atributo] + " "
         print(elem + "\n")
 
+
+def modifica_url(datos):
+    for lista in datos:
+        sublista = lista[1]
+        for atributo in sublista:
+            if sublista[atributo][:7] == "http://":
+                urlretrieve(sublista[atributo])
+                print(sublista[atributo])
+                url = sublista[atributo].split('/')
+                sublista[atributo] = url[-1]
+                print(sublista[atributo])
 
 if __name__ == "__main__":
 
@@ -37,3 +49,5 @@ if __name__ == "__main__":
     fich_json = open('karaoke.json', 'w')
     json.dump(datos, fich_json, sort_keys=True, indent=4, separators=(',', ':'))
     fich_json.close()
+
+    modifica_url(datos)
