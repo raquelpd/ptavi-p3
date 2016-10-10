@@ -5,9 +5,10 @@ from xml.sax import make_parser
 from xml.sax.handler import ContentHandler
 import smallsmilhandler
 import sys
+import json
 
 
-def elems(datos):
+def print_elementos(datos):
     elem = ''
     for lista in datos:
         elem = lista[0]
@@ -31,4 +32,8 @@ if __name__ == "__main__":
     parser.parse(fich)
     datos = cHandler.get_tags()
 
-    elems(datos)
+    print_elementos(datos)
+
+    fich_json = open('karaoke.json', 'w')
+    json.dump(datos, fich_json, sort_keys=True, indent=4, separators=(',', ':'))
+    fich_json.close()
