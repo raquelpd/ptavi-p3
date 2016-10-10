@@ -21,12 +21,13 @@ class SmallSMILHandler(ContentHandler):
 
 		if name in self.atributos:
 			dicc = {}
-			for atributo in self.atibutos[name]:
+			for atributo in self.atributos[name]:
 				dicc[atributo] = attrs.get(atributo, "")
 			self.etiquetas.append([name, dicc])
 	
-		def get_tags(self):
-			return self.etiquetas
+	def get_tags(self):
+		
+		return self.etiquetas
 
 
 if __name__ == "__main__":
@@ -35,7 +36,7 @@ if __name__ == "__main__":
 	parser = make_parser()
 	cHandler = SmallSMILHandler()
 	parser.setContentHandler(cHandler)
-	parser.parse(open('karaoe.smil))
+	parser.parse(open('karaoke.smil'))
 	datos = cHandler.get_tags()
 	print(datos)
 
