@@ -12,7 +12,7 @@ from urllib.request import urlretrieve
 
 class KaraokeLocal(SmallSMILHandler):
 
-    def __init__(self,fich):
+    def __init__(self, fich):
         parser = make_parser()
         cHandler = smallsmilhandler.SmallSMILHandler()
         parser.setContentHandler(cHandler)
@@ -30,7 +30,7 @@ class KaraokeLocal(SmallSMILHandler):
             print(elem + "\n")
         return(elem)
 
-    def to_json(self, fich, new_fich = ""):
+    def to_json(self, fich, new_fich=""):
         if new_fich == "":
             nf = fich[:fich.find('.')]
         else:
@@ -38,7 +38,6 @@ class KaraokeLocal(SmallSMILHandler):
         fich_json = open(nf + '.json', 'w')
         json.dump(self.datos, fich_json, sort_keys=True, indent=4, separators=(',', ':'))
         fich_json.close()
-     
 
     def do_local(self):
         for lista in self.datos:
@@ -63,5 +62,3 @@ if __name__ == "__main__":
 
     except IndexError:
         sys.exit("Usage: python3 karaoke.py file.smil")
-    
-
